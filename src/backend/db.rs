@@ -11,7 +11,7 @@ async fn db() -> Pool<Sqlite> {
   let pool = sqlx::sqlite::SqlitePool::connect("sqlite://db.sqlite").await.unwrap();
 
   pool.execute("
-    CREATE TABLE IF NOT EXISTS todos (
+    CREATE TABLE IF NOT EXISTS adresse (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       vorname TEXT,
       nachname TEXT
