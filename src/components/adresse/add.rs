@@ -21,7 +21,7 @@ pub fn Add() -> Element {
         button {
           class: "text-slate-50 bg-sky-500 p-1 rounded w-1/4 hover:bg-sky-600",
           onclick: move |_| async move {
-              match add_new_adresse((*content.read()).clone(), false).await {
+              match add_new_adresse(*content.read().clone()).await {
                   Ok(id) => {
                       let adresse = Adresse {
                           id,

@@ -6,10 +6,10 @@ use super::super::{db::get_db, models::adresse::AdresseSql};
 
 
 #[server]
-pub async fn add_new_adresse(content: String, completed: bool) -> Result<i64, ServerFnError> {
+pub async fn add_new_adresse(vorname: String, nachname: String) -> Result<i64, ServerFnError> {
   let db = get_db().await;
 
-  let result = sqlx::query("INSERT INTO adresse (vorname, nachname) VALUES(?1, ?2)").bind(&content).bind(&completed).execute(db).await.unwrap();
+  let result = sqlx::query("INSERT INTO adresse (vorname, nachname) VALUES(?, ?)").bind(&vorname).bind(&nachname).execute(db).await.unwrap();
 
   Ok(result.last_insert_rowid())
 }

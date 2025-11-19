@@ -14,7 +14,7 @@ use components::adresse::{detail::Detail, home::Home};
 enum Route {
     #[route("/")]
     Home {},
-    #[route("/blog/:id")]
+    #[route("/adresse/:id")]
     Detail { id: i64 },
 }
 
