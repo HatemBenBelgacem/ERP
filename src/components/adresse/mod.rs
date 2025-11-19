@@ -1,4 +1,4 @@
 pub mod add;
-pub mod adresse;
+pub mod detail;
 pub mod home;
 pub mod list;

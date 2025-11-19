@@ -7,7 +7,7 @@ use crate::backend::server_functions::adresse_fns::get_adresse_liste;
 mod backend;
 mod components;
 
-use components::adresse::{adresse::Adresse, home::Home};
+use components::adresse::{detail::Detail, home::Home};
 
 #[derive(Debug, Clone, Routable, PartialEq)]
 #[rustfmt::skip]
@@ -15,7 +15,7 @@ enum Route {
     #[route("/")]
     Home {},
     #[route("/blog/:id")]
-    Adresse { id: i64 },
+    Detail { id: i64 },
 }
 
 

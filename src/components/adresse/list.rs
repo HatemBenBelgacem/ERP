@@ -9,7 +9,7 @@ pub fn List () -> Element {
   
   if list.read().len() == 0 {
     rsx!(
-      div { class: "text-center text-xl", "No ToDos" }
+      div { class: "text-center text-xl", "No Adresse" }
     )
   } else {
       rsx!(
@@ -25,7 +25,7 @@ pub fn List () -> Element {
                             class: "mb-2 flex justify-between items-center bg-slate-100  px-2 py-2 rounded hover:bg-slate-200",
                             key: id,
                             div { class: "flex",
-                              Link { to: Route::Adresse { id }, "{item.vorname.clone()}" }
+                              Link { to: Route::Detail { id }, "{item.vorname.clone()}" }
                             }
                            
                           }

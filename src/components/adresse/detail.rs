@@ -3,7 +3,7 @@ use dioxus::prelude::*;
 use crate::backend::server_functions::adresse_fns::get_single_adresse;
 
 #[component]
-pub fn Adresse(id: i64) -> Element {
+pub fn Detail(id: i64) -> Element {
   let mut list = use_signal(|| vec![]);
   let navigator = use_navigator();
   let _ = use_resource(move || async move {
