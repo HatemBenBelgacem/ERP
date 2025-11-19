@@ -2,7 +2,7 @@ use dioxus::prelude::*;
 use crate::Adresse;
 
 #[cfg(feature = "server")]
-use super::{db::get_db, model::AdresseSql};
+use super::super::{db::get_db, models::adresse::AdresseSql};
 
 
 #[server]
@@ -18,17 +18,17 @@ pub async fn add_new_adresse(content: String, completed: bool) -> Result<i64, Se
 pub async fn get_adresse_liste () -> Result<Vec<Adresse>, ServerFnError> {
   let db = get_db().await;
   
-  let rows : Vec<ToDoSql> = sqlx::query_as("SELECT * FROM adresse").fetch_all(db).await.unwrap();
+  let rows : Vec<AdresseSql> = sqlx::query_as("SELECT * FROM adresse").fetch_all(db).await.unwrap();
 
   let mut v = vec![];
 
   for row in rows {
-    let todo = Adresse {
+    let adresse = Adresse {
       id: row.id,
       vorname: row.vorname,
       nachname: row.nachname
     };
-    v.push(todo);
+    v.push(adresse);
   }
 
   Ok(v)
@@ -44,11 +44,11 @@ pub async fn get_single_adresse(id: i64) -> Result<Adresse, ServerFnError> {
     let msg = format!("Todo id : {} Not Found.", id);
     Err(ServerFnError::new(msg))
   } else {
-    let todo = ToDo {
+    let adresse = Adresse {
       id: rows[0].id,
-      vorname: rows[0].content.clone(),
-      nachname: rows[0].completed
+      vorname: rows[0].vorname.clone(),
+      nachname: rows[0].nachname.clone()
     };
-    Ok(todo)
+    Ok(adresse)
   }
 }
