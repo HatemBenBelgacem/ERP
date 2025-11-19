@@ -13,8 +13,8 @@ async fn db() -> Pool<Sqlite> {
   pool.execute("
     CREATE TABLE IF NOT EXISTS adresse (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
-      vorname TEXT,
-      nachname TEXT
+      vorname TEXT
+
     )
   ").await.unwrap();
 

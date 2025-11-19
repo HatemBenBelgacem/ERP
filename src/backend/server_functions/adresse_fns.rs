@@ -9,7 +9,7 @@ use super::super::{db::get_db, models::adresse::AdresseSql};
 pub async fn add_new_adresse(vorname: String, nachname: String) -> Result<i64, ServerFnError> {
   let db = get_db().await;
 
-  let result = sqlx::query("INSERT INTO adresse (vorname, nachname) VALUES(?, ?)").bind(&vorname).bind(&nachname).execute(db).await.unwrap();
+  let result = sqlx::query("INSERT INTO adresse (vorname) VALUES(?)").bind(&vorname).bind(&nachname).execute(db).await.unwrap();
 
   Ok(result.last_insert_rowid())
 }
@@ -26,7 +26,7 @@ pub async fn get_adresse_liste () -> Result<Vec<Adresse>, ServerFnError> {
     let adresse = Adresse {
       id: row.id,
       vorname: row.vorname,
-      nachname: row.nachname
+
     };
     v.push(adresse);
   }
@@ -47,7 +47,7 @@ pub async fn get_single_adresse(id: i64) -> Result<Adresse, ServerFnError> {
     let adresse = Adresse {
       id: rows[0].id,
       vorname: rows[0].vorname.clone(),
-      nachname: rows[0].nachname.clone()
+
     };
     Ok(adresse)
   }

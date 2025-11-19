@@ -19,7 +19,6 @@ enum Route {
 }
 
 
-
 fn main() {
     dioxus::launch(App);
 }
@@ -45,7 +44,7 @@ fn App() -> Element {
 pub struct Adresse {
     pub id: i64,
     pub vorname: String,
-    pub nachname: String,
+
 }
 
 

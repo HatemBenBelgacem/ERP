@@ -25,7 +25,7 @@ pub fn Detail(id: i64) -> Element {
           div { class: "text-3xl",
             h1 { "id: {list.read()[0].id}" }
             h1 { "content: {list.read()[0].vorname}" }
-            h1 { "completed: {list.read()[0].nachname}" }
+
           }
         }
       }

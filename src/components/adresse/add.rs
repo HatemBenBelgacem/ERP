@@ -21,12 +21,14 @@ pub fn Add() -> Element {
         button {
           class: "text-slate-50 bg-sky-500 p-1 rounded w-1/4 hover:bg-sky-600",
           onclick: move |_| async move {
-              match add_new_adresse(*content.read().clone()).await {
+              let content_value = content.read().clone();
+              
+              // HIER IST DIE KORREKTUR: Zwei Argumente übergeben
+              match add_new_adresse(content_value.clone(), content_value).await {
                   Ok(id) => {
                       let adresse = Adresse {
                           id,
-                          vorname: (*content.read()).clone(),
-                          nachname: (*content.read()).clone()
+                          vorname: (*content.read()).clone()
                       };
                       let mut new_list = list_signal.read().clone();
                       new_list.push(adresse);

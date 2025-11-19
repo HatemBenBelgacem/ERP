@@ -2,6 +2,5 @@
 #[derive(sqlx::FromRow)]
 pub struct AdresseSql {
   pub id : i64,
-  pub vorname: String,
-  pub nachname: String
+  pub vorname: String
 }
