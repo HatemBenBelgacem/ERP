@@ -1,23 +1,8 @@
 use dioxus::prelude::*;
 use serde::{Deserialize, Serialize};
-
-
-use crate::backend::server_functions::adresse_fns::get_adresse_liste;
+use backend::server_functions::adresse_fns::save_name;
 
 mod backend;
-mod components;
-
-use components::adresse::{detail::Detail, home::Home};
-
-#[derive(Debug, Clone, Routable, PartialEq)]
-#[rustfmt::skip]
-enum Route {
-    #[route("/")]
-    Home {},
-    #[route("/adresse/:id")]
-    Detail { id: i64 },
-}
-
 
 fn main() {
     dioxus::launch(App);
@@ -25,17 +10,38 @@ fn main() {
 
 #[component]
 fn App() -> Element {
-    let mut list = use_signal(|| vec![]);
-
-    let _ = use_resource(move || async move {
-        match get_adresse_liste().await {
-            Ok(adresse) => list.set(adresse),
-            Err(_) => ()
-        }
-    });
+    let mut eingabe = use_signal(|| String::new());
+    let mut list_signal = use_context::<Signal<Vec<Adresse>>>();
     
     rsx! {
-        Router::<Route> {}
+        h1 { "Hot Dog"}
+
+          div {
+            input {  
+                r#type:"text",
+                value: eingabe,
+                oninput: move |e| eingabe.set(e.value()),
+            }  
+            button {  
+                onclick: move |_| async move {
+                    match save_name((*eingabe.read()).clone()).await {
+                        Ok(id) => {
+                            let adresse = Adresse {
+                                id,
+                                name: (*eingabe.read()).clone(),
+                            };
+                            let mut new_list = list_signal.read().clone();
+                            new_list.push(adresse);
+                            list_signal.set(new_list);
+                        }
+                        Err(_) => {}
+                    }
+                    eingabe.set(String::new());
+                },
+                disabled: if eingabe.to_string().trim() == "" {true} else {false},
+                "save"
+            }
+        }
     }
 }
 
@@ -43,7 +49,7 @@ fn App() -> Element {
 #[derive(Debug,Clone,PartialEq, Serialize, Deserialize)]
 pub struct Adresse {
     pub id: i64,
-    pub vorname: String,
+    pub name: String,
 
 }
 
