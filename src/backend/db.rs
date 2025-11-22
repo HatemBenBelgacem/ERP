@@ -1,5 +1,8 @@
+// src/backend/db.rs
+use dioxus::prelude::*; // Für ServerFnError falls nötig, meist aber sqlx imports
+
 #[cfg(feature = "server")]
-use sqlx::{Executor, Pool, Sqlite};
+use sqlx::{Pool, Sqlite, sqlite::SqlitePoolOptions, Executor}; // SqlitePoolOptions importieren
 #[cfg(feature = "server")]
 use tokio::sync::OnceCell;
 
@@ -8,15 +11,24 @@ static DB : OnceCell<Pool<Sqlite>> = OnceCell::const_new();
 
 #[cfg(feature = "server")]
 async fn db() -> Pool<Sqlite> {
-  let pool = sqlx::sqlite::SqlitePool::connect("sqlite://db.sqlite").await.unwrap();
+  // KORREKTUR: create_if_missing(true) hinzufügen!
+  // Wir nutzen SqliteConnectOptions um sicherzustellen, dass die Datei erstellt wird.
+  let options = sqlx::sqlite::SqliteConnectOptions::new()
+      .filename("db.sqlite")
+      .create_if_missing(true);
 
+  let pool = SqlitePoolOptions::new()
+      .connect_with(options)
+      .await
+      .expect("Konnte Datenbank nicht verbinden");
+
+  // Tabelle erstellen
   pool.execute("
     CREATE TABLE IF NOT EXISTS adresse (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
-      name TEXT
-
+      name TEXT NOT NULL
     )
-  ").await.unwrap();
+  ").await.expect("Konnte Tabelle nicht erstellen");
 
   pool
 }

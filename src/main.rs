@@ -8,40 +8,49 @@ fn main() {
     dioxus::launch(App);
 }
 
+// src/main.rs
+
 #[component]
 fn App() -> Element {
     let mut eingabe = use_signal(|| String::new());
-    let mut list_signal = use_context::<Signal<Vec<Adresse>>>();
+    let mut list_signal = use_signal(|| Vec::<Adresse>::new()); 
     
     rsx! {
-        h1 { "Hot Dog"}
+        h1 { "Hot Dog" }
 
-          div {
+        div {
             input {  
-                r#type:"text",
+                r#type: "text",
                 value: eingabe,
                 oninput: move |e| eingabe.set(e.value()),
             }  
             button {  
                 onclick: move |_| async move {
-                    match save_name((*eingabe.read()).clone()).await {
+                    let name_to_save = eingabe.read().clone();
+                    
+                    // HIER: Das Ergebnis loggen
+                    match save_name(name_to_save.clone()).await {
                         Ok(id) => {
+                            println!("Erfolg! ID: {}", id); // Ausgabe in der Browser-Konsole
                             let adresse = Adresse {
                                 id,
-                                name: (*eingabe.read()).clone(),
+                                name: name_to_save,
                             };
-                            let mut new_list = list_signal.read().clone();
-                            new_list.push(adresse);
-                            list_signal.set(new_list);
+                            list_signal.write().push(adresse);
                         }
-                        Err(_) => {}
+                        Err(e) => {
+                            // WICHTIG: Fehler ausgeben!
+                            println!("FEHLER beim Speichern: {:?}", e); 
+                            // Optional: Alert im Browser anzeigen (via web-sys oder gloo)
+                        }
                     }
                     eingabe.set(String::new());
                 },
-                disabled: if eingabe.to_string().trim() == "" {true} else {false},
+                disabled: if eingabe.read().trim().is_empty() { true } else { false },
                 "save"
             }
         }
+        // ... (Rest des Codes für die Liste)
     }
 }
 

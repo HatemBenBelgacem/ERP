@@ -1,6 +1,6 @@
 #[cfg(feature = "server")]
-#[derive(sqlx::FromRow)]
+#[derive(sqlx::FromRow, Debug)] // Debug ist hilfreich
 pub struct AdresseSql {
   pub id : i64,
-  pub vorname: String
+  pub name: String // WAR: vorname -> MUSS name heißen, wie in der DB
 }
