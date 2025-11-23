@@ -26,9 +26,7 @@ pub fn Add() -> Element {
                 oninput: move |e| nachname.set(e.value()),
             }  
 
-            }
-            
-                
+            }   
             button {  
                 onclick: move |_| async move {
                     let save_vorname = vorname.read().clone();
@@ -59,6 +57,7 @@ pub fn Add() -> Element {
             }
         }
         // ... (Rest des Codes für die Liste)
+        Link { to: "/", "Zurück zur Startseite" }
     }
 }
 
