@@ -26,7 +26,7 @@ async fn db() -> Pool<Sqlite> {
   pool.execute("
     CREATE TABLE IF NOT EXISTS adresse (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
-      name TEXT NOT NULL,
+      vorname TEXT NOT NULL,
       nachname TEXT NOT NULL
     )
   ").await.expect("Konnte Tabelle nicht erstellen");
