@@ -14,7 +14,7 @@ async fn db() -> Pool<Sqlite> {
   // KORREKTUR: create_if_missing(true) hinzufügen!
   // Wir nutzen SqliteConnectOptions um sicherzustellen, dass die Datei erstellt wird.
   let options = sqlx::sqlite::SqliteConnectOptions::new()
-      .filename("ERP.sqlite")
+      .filename("ERP.db")
       .create_if_missing(true);
 
   let pool = SqlitePoolOptions::new()
