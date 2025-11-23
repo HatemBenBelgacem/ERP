@@ -14,7 +14,7 @@ async fn db() -> Pool<Sqlite> {
   // KORREKTUR: create_if_missing(true) hinzufügen!
   // Wir nutzen SqliteConnectOptions um sicherzustellen, dass die Datei erstellt wird.
   let options = sqlx::sqlite::SqliteConnectOptions::new()
-      .filename("db.sqlite")
+      .filename("ERP.sqlite")
       .create_if_missing(true);
 
   let pool = SqlitePoolOptions::new()
@@ -26,7 +26,8 @@ async fn db() -> Pool<Sqlite> {
   pool.execute("
     CREATE TABLE IF NOT EXISTS adresse (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
-      name TEXT NOT NULL
+      name TEXT NOT NULL,
+      nachname TEXT NOT NULL
     )
   ").await.expect("Konnte Tabelle nicht erstellen");
 
