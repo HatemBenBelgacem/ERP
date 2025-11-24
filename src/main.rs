@@ -1,6 +1,6 @@
 use dioxus::prelude::*;
 use serde::{Deserialize, Serialize};
-use components::{home::Home, list::AdressListe, app_layout::AppLayout};
+use components::{home::Home, list::AdressListe, app_layout::AppLayout, add::Add};
 
 
 mod backend;
@@ -32,7 +32,9 @@ pub enum Route {
     #[route("/")]
     Home {},
     #[route("/adressen")]
-    AdressListe {}
+    AdressListe {},
+    #[route("/adressen/add")]
+    Add{}
 }
 
 
