@@ -11,9 +11,18 @@ pub fn AdressListe() -> Element {
     });
 
     rsx! {
+        h1 { "Adress Liste" } 
         div {
-            h2 { "Adress Liste" }
-
+            Link { 
+                class:"btn",
+                to: "/adressen/add", "Neu"
+            }
+            Link { 
+                class: "btn",
+                to: "/", "Zurück" 
+            }   
+        }
+        div {
             match &*adressen_resource.read_unchecked() {
                 // 1. Erfolgreich geladen (Some -> Ok)
                 Some(Ok(adressen)) => rsx! {
@@ -59,8 +68,6 @@ pub fn AdressListe() -> Element {
             
             
         }
-        Link { to: "/adressen/add", "Adresse hinzufügen" }
-        br {  }
-        Link { to: "/", "Zurück zur Startseite" }
+       
     }
 }

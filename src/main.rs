@@ -1,9 +1,15 @@
 use dioxus::prelude::*;
 use serde::{Deserialize, Serialize};
-use components::{add::Add, home::Home, list::AdressListe};
+use components::{home::Home, list::AdressListe, app_layout::AppLayout};
+
 
 mod backend;
 mod components;
+
+// Variablen
+static CSS: Asset = asset!("/assets/main.css");
+
+
 
 fn main() {
     dioxus::launch(App);
@@ -14,6 +20,7 @@ fn main() {
 #[component]
 fn App() -> Element {
     rsx!(
+        document::Stylesheet { href: CSS}
         Router::<Route> {}
     )
         
@@ -21,12 +28,11 @@ fn App() -> Element {
 
 #[derive(Clone, PartialEq, Routable)]
 pub enum Route {
+    #[layout(AppLayout)]
     #[route("/")]
     Home {},
     #[route("/adressen")]
-    AdressListe {},
-    #[route("/adressen/add")]
-    Add{}
+    AdressListe {}
 }
 
 
