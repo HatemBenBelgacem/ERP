@@ -1,4 +1,5 @@
-use dioxus::prelude::*;
+use dioxus::{html::form, prelude::*};
+
 
 use crate::{backend::server_functions::adresse_fns::adress_liste};
 
@@ -11,16 +12,16 @@ pub fn AdressListe() -> Element {
     });
 
     rsx! {
-        h1 { "Adress Liste" } 
         div {
+            class:"functions",
             Link { 
                 class:"btn",
-                to: "/adressen/add", "Neu"
+                to: "/adressen/add", "Neu",
             }
             Link { 
                 class: "btn",
                 to: "/", "Zurück" 
-            }   
+            } 
         }
         div {
             match &*adressen_resource.read_unchecked() {
@@ -36,6 +37,8 @@ pub fn AdressListe() -> Element {
                                     th { style: "text-align: left; border-bottom: 1px solid #ddd;", "ID" }
                                     th { style: "text-align: left; border-bottom: 1px solid #ddd;", "Vorname" }
                                     th { style: "text-align: left; border-bottom: 1px solid #ddd;", "Nachname" }
+                                    th { style: "text-align: left; border-bottom: 1px solid #ddd;", "Strasse" }
+                                    th { style: "text-align: left; border-bottom: 1px solid #ddd;", "Strasse-Nr." }
                                 }
                             }
                             tbody {
@@ -44,6 +47,8 @@ pub fn AdressListe() -> Element {
                                         td { style: "padding: 8px; border-bottom: 1px solid #444;", "{adresse.id}" }
                                         td { style: "padding: 8px; border-bottom: 1px solid #444;", "{adresse.vorname}" }
                                         td { style: "padding: 8px; border-bottom: 1px solid #444;", "{adresse.nachname}" }
+                                        td { style: "padding: 8px; border-bottom: 1px solid #444;", "{adresse.strasse}" }
+                                        td { style: "padding: 8px; border-bottom: 1px solid #444;", "{adresse.strassen_nr}" }
                                     }
                                 }
                             }

@@ -4,9 +4,8 @@ use dioxus::prelude::*;
 
  #[component]
 pub fn Home() -> Element {
-    rsx! {
-        div { 
-            h1 { "Home-Bildschirm" }
-        }
+    rsx! { 
+        h1 { "Home-Bildschirm" }
+        
     }
 }

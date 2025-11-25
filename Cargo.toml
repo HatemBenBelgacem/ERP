@@ -8,11 +8,13 @@ edition = "2021"
 
 [dependencies]
 dioxus = { version = "0.6.0", features = ["router", "fullstack"] }
+dioxus-free-icons = { version = "0.9", features = ["font-awesome-brands"] }
 
 serde = { version = "1.0.215", features = ["derive"] }
 
 sqlx = { version="0.8.3", features = [ "sqlite", "runtime-tokio", "tls-native-tls" ], optional = true}
 tokio = { version = "1.20.0", features = ["full"] , optional = true}
+
 
 [features]
 default = ["web"]

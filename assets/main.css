@@ -1,14 +1,22 @@
 /* App-wide styling */
 body {
-    background-color: #f0f8ff;
+    background-color: #E0FFFF;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0px;
 }
 #main {
     margin: 0px;
+    height: 100vh;
 
 }
 
+/*Navigation*/
+.nav a{
+    text-decoration: none;
+}
+
+
+/*Grundgerüst*/
 .container {
     display: grid;
     grid-template-areas:
@@ -19,11 +27,18 @@ body {
 }
 
 .container div {
-    border: 0.5px solid rgb(192, 192, 192);
+    background-color: white;
+
 }
 .container div.header {
     grid-area: header;
     background-color: green;
+    margin-bottom: 5px;
+ 
+}
+.container div.header a {
+   text-decoration: none;
+   padding-left: 20px;
 }
 
 .container div.menu {
@@ -37,4 +52,15 @@ body {
     text-decoration: none;
     padding: 5px 10px;
     border-radius: 5;
+    height: 25px;
+}
+
+/*Menüband*/
+.functions {
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
+.functions a {
+    margin: 5px;
 }

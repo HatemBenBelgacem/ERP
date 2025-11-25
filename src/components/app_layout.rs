@@ -1,4 +1,4 @@
-use dioxus::{html::div, prelude::*};
+use dioxus::{prelude::*};
 
 use crate::components::{header::Header, nav::Nav};
 use crate::Route;

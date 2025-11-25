@@ -1,7 +1,15 @@
+use serde::{Deserialize, Serialize};
+
 #[cfg(feature = "server")]
-#[derive(sqlx::FromRow, Debug)] // Debug ist hilfreich
-pub struct AdresseSql {
+use sqlx::FromRow;
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+// Füge das FromRow-Makro nur hinzu, wenn das "server"-Feature aktiv ist
+#[cfg_attr(feature = "server", derive(FromRow))]
+pub struct Adresse {
   pub id : i64,
   pub vorname: String, 
-  pub nachname: String // WAR: vorname -> MUSS name heißen, wie in der DB
+  pub nachname: String, 
+  pub strasse: String,
+  pub strassen_nr: i32
 }

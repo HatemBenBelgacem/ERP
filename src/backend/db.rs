@@ -1,5 +1,4 @@
 // src/backend/db.rs
-use dioxus::prelude::*; // Für ServerFnError falls nötig, meist aber sqlx imports
 
 #[cfg(feature = "server")]
 use sqlx::{Pool, Sqlite, sqlite::SqlitePoolOptions, Executor}; // SqlitePoolOptions importieren
@@ -27,7 +26,9 @@ async fn db() -> Pool<Sqlite> {
     CREATE TABLE IF NOT EXISTS adresse (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       vorname TEXT NOT NULL,
-      nachname TEXT NOT NULL
+      nachname TEXT NOT NULL,
+      strasse TEXT NULL,
+      strassen_nr INT NULL
     )
   ").await.expect("Konnte Tabelle nicht erstellen");
 

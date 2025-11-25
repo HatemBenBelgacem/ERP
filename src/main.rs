@@ -1,6 +1,7 @@
 use dioxus::prelude::*;
-use serde::{Deserialize, Serialize};
 use components::{home::Home, list::AdressListe, app_layout::AppLayout, add::Add};
+use crate::backend::models::adresse::Adresse;
+
 
 
 mod backend;
@@ -37,12 +38,5 @@ pub enum Route {
     Add{}
 }
 
-
-#[derive(Debug,Clone,PartialEq, Serialize, Deserialize)]
-pub struct Adresse {
-    pub id: i64,
-    pub vorname: String,
-    pub nachname: String,
-}
 
 
