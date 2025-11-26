@@ -44,11 +44,11 @@ pub fn AdressListe() -> Element {
                             tbody {
                                 for adresse in adressen {
                                     tr { key: "{adresse.id}",
-                                        td { style: "padding: 8px; border-bottom: 1px solid #444;", "{adresse.id}" }
-                                        td { style: "padding: 8px; border-bottom: 1px solid #444;", "{adresse.vorname}" }
-                                        td { style: "padding: 8px; border-bottom: 1px solid #444;", "{adresse.nachname}" }
-                                        td { style: "padding: 8px; border-bottom: 1px solid #444;", "{adresse.strasse}" }
-                                        td { style: "padding: 8px; border-bottom: 1px solid #444;", "{adresse.strassen_nr}" }
+                                        td { style: "padding: 8px;", "{adresse.id}" }
+                                        td { style: "padding: 8px;", "{adresse.vorname}" }
+                                        td { style: "padding: 8px;", "{adresse.nachname}" }
+                                        td { style: "padding: 8px;", "{adresse.strasse}" }
+                                        td { style: "padding: 8px;", "{adresse.strassen_nr}" }
                                     }
                                 }
                             }

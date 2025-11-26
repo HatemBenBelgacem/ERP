@@ -1,6 +1,6 @@
 /* App-wide styling */
 body {
-    background-color: #E0FFFF;
+    background-color:#F0F8FF;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0px;
 }
@@ -13,6 +13,10 @@ body {
 /*Navigation*/
 .nav a{
     text-decoration: none;
+    color: black;
+}
+h3 {
+    margin-left: 40px;
 }
 
 
@@ -23,17 +27,14 @@ body {
     "header header"
     "menu content";
     grid-template-columns: 1fr 5fr;
-    gap: 3px;
 }
 
 .container div {
     background-color: white;
-
 }
 .container div.header {
     grid-area: header;
-    background-color: green;
-    margin-bottom: 5px;
+    border:0.5px solid rgb(206, 206, 206);
  
 }
 .container div.header a {
@@ -43,9 +44,18 @@ body {
 
 .container div.menu {
     grid-area: menu;
+    border:0.5px solid rgb(206, 206, 206);
 }
 
+.container div.content {
+    border:0.5px solid rgb(206, 206, 206);
+    padding:25px;
+}
 /*Button*/
+button {
+    all: unset;
+}
+
 .btn {
     border:0.5px solid black;
     color: #1f1f1f;
@@ -53,6 +63,10 @@ body {
     padding: 5px 10px;
     border-radius: 5;
     height: 25px;
+    width: 80px;
+    font-size: 12pt;
+    text-align: center;
+    margin-bottom: 10px;
 }
 
 /*Menüband*/
@@ -63,4 +77,12 @@ body {
 }
 .functions a {
     margin: 5px;
+}
+
+.add_form input {
+    width: 50%;
+    height: 30px;
+    border:0.5px solid grey;
+    border-radius: 5px;
+    margin-bottom: 10px;
 }

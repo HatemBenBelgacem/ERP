@@ -5,7 +5,8 @@ use dioxus::prelude::*;
 #[component]
 pub fn Nav() -> Element {
     rsx!{
-        h1 {  "Navigation"}
+        h3 { class:"nav",
+            "Navigation"}
 
         li { 
             ul {

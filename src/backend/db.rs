@@ -1,5 +1,3 @@
-// src/backend/db.rs
-
 #[cfg(feature = "server")]
 use sqlx::{Pool, Sqlite, sqlite::SqlitePoolOptions, Executor}; // SqlitePoolOptions importieren
 #[cfg(feature = "server")]
