@@ -1,5 +1,6 @@
 use dioxus::prelude::*;
-use components::{home::Home, list::AdressListe, app_layout::AppLayout, add::Add};
+use components::adresse::{list::AdressListe, add::Add};
+use components::{home::Home, app_layout::AppLayout};
 use crate::backend::models::adresse::Adresse;
 
 
