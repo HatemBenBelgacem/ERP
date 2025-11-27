@@ -15,7 +15,7 @@ pub fn Nav() -> Element {
             }
             ul {
                 class:"nav", 
-                Link { to: "/auftrag", "Auftrag" }
+                Link { to: "/auftrag/add", "Auftrag" }
             }
         }    
        

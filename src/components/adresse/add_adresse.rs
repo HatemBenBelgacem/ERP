@@ -3,7 +3,7 @@ use dioxus::prelude::*;
 use crate::{backend::server_functions::adresse_fns::save_adresse, Adresse};
 
 #[component]
-pub fn Add() -> Element {
+pub fn AddAdresse() -> Element {
     let mut vorname = use_signal(|| String::new());
     let mut nachname = use_signal(|| String::new());
     let mut strasse = use_signal(|| String::new());

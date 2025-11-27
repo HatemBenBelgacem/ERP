@@ -8,6 +8,6 @@ use sqlx::FromRow;
 #[cfg_attr(feature = "server", derive(FromRow))]
 pub struct Auftrag {
   pub id : i64,
-  pub Bezeichung: String, 
-  pub Kunde: String
+  pub bezeichnung: String, 
+  pub kunde: String
 }

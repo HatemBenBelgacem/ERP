@@ -1,9 +1,10 @@
 use dioxus::prelude::*;
-use components::adresse::{list::AdressListe, add::Add};
+use components::adresse::{list::AdressListe, add_adresse::AddAdresse};
+use components::auftrag::{add_auftrag::AddAuftrag};
 use components::{home::Home, app_layout::AppLayout};
 use crate::backend::models::adresse::Adresse;
-use chrono::Local;
-use tokio::time::{Duration};
+use crate::backend::models::auftrag::Auftrag;
+
 
 
 
@@ -24,11 +25,10 @@ fn main() {
 
 #[component]
 fn App() -> Element {
-    let jetzt = Local::now().format("%H:%M:%S").to_string();
+    
 
     
     rsx!(
-        h1 { "{jetzt}" }
         document::Stylesheet { href: CSS}
         document::Link {rel: "icon", href: FAVICON}
         Router::<Route> {}
@@ -44,8 +44,12 @@ pub enum Route {
     #[route("/adressen")]
     AdressListe {},
     #[route("/adressen/add")]
-    Add{}
-}
+    AddAdresse{},
+    #[route("/auftrag/add")]
+    AddAuftrag{}
+
+}   
+
 
 
 

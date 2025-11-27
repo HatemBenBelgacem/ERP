@@ -30,6 +30,14 @@ async fn db() -> Pool<Sqlite> {
     )
   ").await.expect("Konnte Tabelle nicht erstellen");
 
+    pool.execute("
+    CREATE TABLE IF NOT EXISTS auftrag (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      bezeichnung TEXT NOT NULL,
+      kunde TEXT NOT NULL
+    )
+  ").await.expect("Konnte Tabelle nicht erstellen");
+
   pool
 }
 
