@@ -34,7 +34,8 @@ async fn db() -> Pool<Sqlite> {
     CREATE TABLE IF NOT EXISTS auftrag (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       bezeichnung TEXT NOT NULL,
-      kunde TEXT NOT NULL
+      adresse_id INTEGER NOT NULL,
+      FOREIGN KEY(adresse_id) REFERENCES adresse(id)
     )
   ").await.expect("Konnte Tabelle nicht erstellen");
 

@@ -28,7 +28,7 @@ pub fn AuftragListe() -> Element {
                     if auftrag.is_empty() {
                         div{"Keine Aufträge gefunden"}
                     } else {
-                        table{
+                        table {
                             thead{
                                 tr{
                                     th {"ID"}
@@ -41,8 +41,7 @@ pub fn AuftragListe() -> Element {
                                     tr{ key: "{a.id}",
                                     td {"{a.id}"}
                                     td {"{a.bezeichnung}"}
-                                    td {"{a.kunde}"}
-
+                                    td {"{a.adresse_id}"}
                                     }
                                 }
                             }
@@ -60,7 +59,6 @@ pub fn AuftragListe() -> Element {
                 None => rsx! {
                     div {"Lade Daten..."}
                 }
-
             }
         }
     }

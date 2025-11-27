@@ -9,5 +9,5 @@ use sqlx::FromRow;
 pub struct Auftrag {
   pub id : i64,
   pub bezeichnung: String, 
-  pub kunde: String
+  pub adresse_id: i64,
 }

@@ -6,12 +6,12 @@ use crate::backend::models::auftrag::Auftrag;
 use super::super::{db::get_db};
 
 #[server]
-pub async fn save_auftrag(bezeichnung: String, kunde: String) -> Result<i64, ServerFnError> {
+pub async fn save_auftrag(bezeichnung: String, adresse_id: i64) -> Result<i64, ServerFnError> {
   let db = get_db().await;
 
-  let result = sqlx::query("INSERT INTO auftrag (bezeichnung, kunde) VALUES(?, ?)")
+  let result = sqlx::query("INSERT INTO auftrag (bezeichnung, adresse_id) VALUES(?, ?)")
         .bind(&bezeichnung)
-        .bind(&kunde)
+        .bind(&adresse_id)
         .execute(db)
         .await
         .unwrap();
@@ -25,7 +25,7 @@ pub async fn auftrag_liste() -> Result<Vec<Auftrag>, ServerFnError> {
 
 
     // Achten Sie darauf: SELECT name, nicht vorname (so heißt es in Ihrer DB)
-    let rows = sqlx::query_as::<_, Auftrag>("SELECT id, bezeichnung, kunde FROM auftrag")
+    let rows = sqlx::query_as::<_, Auftrag>("SELECT id, bezeichnung, adresse_id FROM auftrag")
         .fetch_all(db)
         .await
         .map_err(|e| ServerFnError::new(e.to_string()))?;
@@ -34,7 +34,7 @@ pub async fn auftrag_liste() -> Result<Vec<Auftrag>, ServerFnError> {
     let auftrag: Vec<Auftrag> = rows.into_iter().map(|sql_row| Auftrag {
         id: sql_row.id,
         bezeichnung: sql_row.bezeichnung, 
-        kunde: sql_row.kunde,
+        adresse_id: sql_row.adresse_id,
     }).collect();
 
     Ok(auftrag)
