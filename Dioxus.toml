@@ -2,6 +2,9 @@
 
 [web.app]
 
+[web]
+favicon = "assets/erp_logo.png"
+
 # HTML title tag content
 title = "erp"
 
