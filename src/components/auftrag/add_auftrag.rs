@@ -45,7 +45,7 @@ pub fn AddAuftrag() -> Element {
 
                                 };
                                 list_signal.write().push(auftrag);
-                                nav.push("/adressen");
+                                nav.push("/auftrag");
                             }
                             Err(e) => {
                                 // WICHTIG: Fehler ausgeben!
