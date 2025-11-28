@@ -1,7 +1,9 @@
 use dioxus::{html::form, prelude::*};
 
 
-use crate::{backend::server_functions::adresse_fns::adress_liste};
+use crate::backend::{server_functions::adresse_fns::adress_liste};
+use crate::components::adresse::delete_adresse::Delete;
+
 
 
 
@@ -49,6 +51,7 @@ pub fn AdressListe() -> Element {
                                         td { "{adresse.nachname}" }
                                         td { "{adresse.strasse}" }
                                         td { "{adresse.strassen_nr}" }
+                                        td { Delete{list_signal: adressen_resource, id} }
                                     }
                                 }
                             }

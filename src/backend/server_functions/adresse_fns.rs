@@ -24,6 +24,21 @@ pub async fn save_adresse(vorname: String, nachname: String, strasse: String, st
 }
 
 #[server]
+pub async fn delete_adresse(id:i64) -> Result<(), ServerFnError> {
+    let db = get_db.await;
+
+    let rows: Vec<Adresse> = sqlx::query_as("SELECT * FROM adresse WHERE id = ?1").bind(&id).fetch_all(db).await.unwrap();
+
+    if rows.len() == 0 {
+        let msg = format!("adresse: {} nicht gefunden", id);
+        Err(ServerFnError::new(msg));
+    } else {
+        sqlx::query("DELETE FROM adresse WHERE id = 1?").bind(&id).execute(db).await.unwrap();
+        Ok(())
+    }
+}
+
+#[server]
 pub async fn adress_liste() -> Result<Vec<Adresse>, ServerFnError> {
     let db = get_db().await;
 
