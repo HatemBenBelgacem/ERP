@@ -43,6 +43,7 @@ pub enum Route {
     Home {},
     #[route("/adressen")]
     AdressListe {},
+    
     #[route("/adressen/add")]
     AddAdresse{},
     #[route("/auftrag")]

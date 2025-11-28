@@ -6,7 +6,6 @@ use crate::backend::models::adresse::Adresse;
 use super::super::{db::get_db};
 
 
-
 #[server]
 pub async fn save_adresse(vorname: String, nachname: String, strasse: String, strassen_nr:i32) -> Result<i64, ServerFnError> {
   let db = get_db().await;
@@ -33,6 +32,18 @@ pub async fn delete_adresse(id:i64) -> Result<(), ServerFnError> {
         .await
         .map_err(|e| ServerFnError::new(e.to_string()))?;
     Ok(())
+}
+
+#[server]
+pub async fn detail_adresse(id: i64) -> Result<Adresse, ServerFnError> {
+    let db = get_db().await;
+
+    let adresse = sqlx::query("SELECT * FROM adresse WHERE id = ?")
+        .bind(id)
+        .fetch_on(db)
+        .await
+        .map_err(|e| ServerFnError::new(e.to_string()))?;
+    ok(adresse)
 }
 
 #[server]
