@@ -30,15 +30,7 @@ pub async fn auftrag_liste() -> Result<Vec<Auftrag>, ServerFnError> {
         .await
         .map_err(|e| ServerFnError::new(e.to_string()))?;
 
-    // 2. Wir wandeln (mappen) die DB-Daten in das Frontend-Format um
-    let auftrag: Vec<Auftrag> = rows.into_iter().map(|sql_row| Auftrag {
-        id: sql_row.id,
-        bezeichnung: sql_row.bezeichnung, 
-        adresse_id: sql_row.adresse_id,
-        vorname: sql_row.vorname
-    }).collect();
-
-    Ok(auftrag)
+    Ok(rows)
 }
 
 

@@ -41,7 +41,7 @@ pub fn AuftragListe() -> Element {
                                     tr{ key: "{a.id}",
                                         td {"{a.id}"}
                                         td {"{a.bezeichnung}"}
-                                        td {"{a.adresse_id}"}
+                                        td {"{a.vorname.clone().unwrap_or_else(|| String::from(\"-\"))}"}
                                     }
                                 }
                             }
