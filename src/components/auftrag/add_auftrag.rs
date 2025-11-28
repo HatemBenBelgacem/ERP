@@ -17,6 +17,12 @@ pub fn AddAuftrag() -> Element {
     
     rsx! {
         div { class:"add_form",
+                label { "Aktiv" }
+                input {  class:"check",
+                    r#type: "checkbox"
+                }
+                br {  }
+                
                 label { "Bezeichnung" }
                 br {  }
                 input {  

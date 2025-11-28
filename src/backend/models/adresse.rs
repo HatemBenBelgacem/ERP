@@ -9,7 +9,7 @@ use sqlx::FromRow;
 pub struct Adresse {
   pub id : i64,
   pub vorname: String, 
-  pub nachname: String, 
+  pub nachname: String,
   pub strasse: String,
   pub strassen_nr: i32
 }

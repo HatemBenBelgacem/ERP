@@ -33,7 +33,9 @@ pub fn AuftragListe() -> Element {
                                 tr{
                                     th {"ID"}
                                     th {"Bezeichnung"}
-                                    th {"Kunde"}
+                                    th { "Vorname"}
+                                    th { "Nachname"}
+                                    th { "Kunde"}
                                 }
                             }
                             tbody{
@@ -42,6 +44,8 @@ pub fn AuftragListe() -> Element {
                                         td {"{a.id}"}
                                         td {"{a.bezeichnung}"}
                                         td {"{a.vorname.clone().unwrap_or_else(|| String::from(\"-\"))}"}
+                                        td {"{a.nachname.clone().unwrap_or_else(|| String::from(\"-\"))}"}
+                                        td {"{a.vorname.clone().unwrap_or_else(|| String::from(\"-\"))}" "{a.nachname.clone().unwrap_or_else(|| String::from(\"-\"))}"}
                                     }
                                 }
                             }

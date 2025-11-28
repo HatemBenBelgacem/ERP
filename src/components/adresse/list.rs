@@ -41,6 +41,7 @@ pub fn AdressListe() -> Element {
                                     th { "Nachname" }
                                     th { "Strasse" }
                                     th { "Strasse-Nr." }
+                                    th { "Aktion" }
                                 }
                             }
                             tbody {
@@ -51,7 +52,7 @@ pub fn AdressListe() -> Element {
                                         td { "{adresse.nachname}" }
                                         td { "{adresse.strasse}" }
                                         td { "{adresse.strassen_nr}" }
-                                        td { Delete{list_signal: adressen_resource, id} }
+                                        td {  Delete{adresse_resource: adressen_resource, id: adresse.id}}
                                     }
                                 }
                             }

@@ -103,3 +103,8 @@ table tr td, table tr th {
     text-align: left;
     line-height: 18pt;
 }
+
+.add_form .check {
+    width: 15px;
+    height: 15px;
+}
