@@ -1,5 +1,5 @@
 use dioxus::prelude::*;
-use components::adresse::{list::AdressListe, add_adresse::AddAdresse};
+use components::adresse::{list::AdressListe, add_adresse::AddAdresse, detail_adresse::AdresseDetail};
 use components::auftrag::{add_auftrag::AddAuftrag, auftrag::AuftragListe};
 use components::{home::Home, app_layout::AppLayout};
 use crate::backend::models::adresse::Adresse;
@@ -43,7 +43,8 @@ pub enum Route {
     Home {},
     #[route("/adressen")]
     AdressListe {},
-    
+    #[route("/adresse/:id")]
+    AdresseDetail{id:i64},
     #[route("/adressen/add")]
     AddAdresse{},
     #[route("/auftrag")]

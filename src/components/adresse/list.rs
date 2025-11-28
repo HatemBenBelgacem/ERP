@@ -3,6 +3,8 @@ use dioxus::{html::form, prelude::*};
 
 use crate::backend::{server_functions::adresse_fns::adress_liste};
 use crate::components::adresse::delete_adresse::Delete;
+use crate::components::adresse::detail_adresse::AdresseDetail;
+use crate::Route;
 
 
 
@@ -41,7 +43,7 @@ pub fn AdressListe() -> Element {
                                     th { "Nachname" }
                                     th { "Strasse" }
                                     th { "Strasse-Nr." }
-                                    th { "Aktion" }
+                                    th { colspan:2,"Aktion" }
                                 }
                             }
                             tbody {
@@ -53,6 +55,7 @@ pub fn AdressListe() -> Element {
                                         td { "{adresse.strasse}" }
                                         td { "{adresse.strassen_nr}" }
                                         td {  Delete{adresse_resource: adressen_resource, id: adresse.id}}
+                                        td { Link{ to: Route::AdresseDetail{id:adresse.id}, "details"} }
                                     }
                                 }
                             }

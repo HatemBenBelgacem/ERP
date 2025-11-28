@@ -5,18 +5,19 @@ use crate::Route;
 
 
 #[component]
-pub fn AdresseDatail(id: i64) -> Element {
+pub fn AdresseDetail(id: i64) -> Element {
     let adresse_resource = use_resource(move || async move {
         detail_adresse(id).await
     });
 
     rsx! {
         div {
-            class: "container",
-            match &adresse_resource.read_unchecked() {
+            match &*adresse_resource.read_unchecked() {
                 Some(Ok(adresse)) => rsx!{
-                    h2 { "Details: {adresse.vorname} {adresse.nachname}" }
-                    p { "ID: {adresse.id}" }
+
+
+                    p { "Vorname: {adresse.vorname}"}
+                    p { "Nachname: {adresse.nachname}" }
                     p { "Strasse: {adresse.strasse} {adresse.strassen_nr}" }
 
                     Link { 

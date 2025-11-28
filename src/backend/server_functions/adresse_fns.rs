@@ -38,12 +38,12 @@ pub async fn delete_adresse(id:i64) -> Result<(), ServerFnError> {
 pub async fn detail_adresse(id: i64) -> Result<Adresse, ServerFnError> {
     let db = get_db().await;
 
-    let adresse = sqlx::query("SELECT * FROM adresse WHERE id = ?")
+    let adresse = sqlx::query_as("SELECT * FROM adresse WHERE id = ?")
         .bind(id)
-        .fetch_on(db)
+        .fetch_one(db)
         .await
         .map_err(|e| ServerFnError::new(e.to_string()))?;
-    ok(adresse)
+    Ok(adresse)
 }
 
 #[server]
