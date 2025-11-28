@@ -1,6 +1,6 @@
 use dioxus::prelude::*;
 
-use crate::{backend::server_functions::auftrag_fns::auftrag_liste};
+use crate::backend::{server_functions::auftrag_fns::auftrag_liste};
 
 
 #[component]
@@ -33,15 +33,15 @@ pub fn AuftragListe() -> Element {
                                 tr{
                                     th {"ID"}
                                     th {"Bezeichnung"}
-                                    th{"Kunde"}
+                                    th {"Kunde"}
                                 }
                             }
                             tbody{
                                 for a in auftrag {
                                     tr{ key: "{a.id}",
-                                    td {"{a.id}"}
-                                    td {"{a.bezeichnung}"}
-                                    td {"{a.adresse_id}"}
+                                        td {"{a.id}"}
+                                        td {"{a.bezeichnung}"}
+                                        td {"{a.adresse_id}"}
                                     }
                                 }
                             }

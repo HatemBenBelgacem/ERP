@@ -31,24 +31,24 @@ pub fn AdressListe() -> Element {
                         div { "Keine Adressen gefunden." }
                     } else {
                         table {
-                            style: "width: 100%; border-collapse: collapse; margin-top: 20px;",
+
                             thead {
                                 tr {
-                                    th { style: "text-align: left; border-bottom: 1px solid #ddd;", "ID" }
-                                    th { style: "text-align: left; border-bottom: 1px solid #ddd;", "Vorname" }
-                                    th { style: "text-align: left; border-bottom: 1px solid #ddd;", "Nachname" }
-                                    th { style: "text-align: left; border-bottom: 1px solid #ddd;", "Strasse" }
-                                    th { style: "text-align: left; border-bottom: 1px solid #ddd;", "Strasse-Nr." }
+                                    th { "ID" }
+                                    th { "Vorname" }
+                                    th { "Nachname" }
+                                    th { "Strasse" }
+                                    th { "Strasse-Nr." }
                                 }
                             }
                             tbody {
                                 for adresse in adressen {
                                     tr { key: "{adresse.id}",
-                                        td { style: "padding: 8px;", "{adresse.id}" }
-                                        td { style: "padding: 8px;", "{adresse.vorname}" }
-                                        td { style: "padding: 8px;", "{adresse.nachname}" }
-                                        td { style: "padding: 8px;", "{adresse.strasse}" }
-                                        td { style: "padding: 8px;", "{adresse.strassen_nr}" }
+                                        td { "{adresse.id}" }
+                                        td { "{adresse.vorname}" }
+                                        td { "{adresse.nachname}" }
+                                        td { "{adresse.strasse}" }
+                                        td { "{adresse.strassen_nr}" }
                                     }
                                 }
                             }

@@ -25,7 +25,7 @@ pub async fn auftrag_liste() -> Result<Vec<Auftrag>, ServerFnError> {
 
 
     // Achten Sie darauf: SELECT name, nicht vorname (so heißt es in Ihrer DB)
-    let rows = sqlx::query_as::<_, Auftrag>("SELECT id, bezeichnung, adresse_id FROM auftrag")
+    let rows = sqlx::query_as::<_, Auftrag>("SELECT auftrag.id, auftrag.bezeichnung, auftrag.adresse_id, adresse.vorname as vorname FROM auftrag INNER JOIN adresse ON adresse.id = auftrag.adresse_id")
         .fetch_all(db)
         .await
         .map_err(|e| ServerFnError::new(e.to_string()))?;
@@ -35,6 +35,7 @@ pub async fn auftrag_liste() -> Result<Vec<Auftrag>, ServerFnError> {
         id: sql_row.id,
         bezeichnung: sql_row.bezeichnung, 
         adresse_id: sql_row.adresse_id,
+        vorname: sql_row.vorname
     }).collect();
 
     Ok(auftrag)

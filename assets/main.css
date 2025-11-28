@@ -92,3 +92,14 @@ img {
     width: 25px;
     align-items: baseline;
 }
+
+/*Tabellen*/
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+table tr td, table tr th {
+    border-bottom: 0.5px solid rgb(184, 184, 184);
+    text-align: left;
+    line-height: 18pt;
+}

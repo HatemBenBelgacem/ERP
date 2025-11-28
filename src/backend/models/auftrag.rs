@@ -10,4 +10,5 @@ pub struct Auftrag {
   pub id : i64,
   pub bezeichnung: String, 
   pub adresse_id: i64,
+  pub vorname: Option<String>,
 }
