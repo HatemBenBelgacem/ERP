@@ -1,5 +1,4 @@
 use dioxus::prelude::*;
-
 use crate::backend::server_functions::adresse_fns::detail_adresse;
 use crate::Route;
 

@@ -1,6 +1,6 @@
 use dioxus::prelude::*;
-use crate::icons::Icon;
-use icons::mdi::Home;
+use crate::icons::{Icon, mdi_light};
+
 
 use crate::backend::server_functions::adresse_fns::delete_adresse;
 use crate::backend::models::adresse::Adresse;
@@ -18,7 +18,7 @@ pub fn Delete(mut adresse_resource: Resource<Result<Vec<Adresse>, ServerFnError>
                     Err(e) => {}
                 }
             },
-            "löschen"
+            Icon{data:mdi_light::Delete}
         }
     }
 }

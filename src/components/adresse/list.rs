@@ -1,5 +1,5 @@
 use dioxus::{html::form, prelude::*};
-
+use crate::icons::{Icon, mdi_light};
 
 use crate::backend::{server_functions::adresse_fns::adress_liste};
 use crate::components::adresse::delete_adresse::Delete;
@@ -55,7 +55,7 @@ pub fn AdressListe() -> Element {
                                         td { "{adresse.strasse}" }
                                         td { "{adresse.strassen_nr}" }
                                         td {  Delete{adresse_resource: adressen_resource, id: adresse.id}}
-                                        td { Link{ to: Route::AdresseDetail{id:adresse.id}, "details"} }
+                                        td { Link{ to: Route::AdresseDetail{id:adresse.id}, Icon { data:mdi_light::ClipboardText }} }
                                     }
                                 }
                             }

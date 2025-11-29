@@ -38,3 +38,4 @@ pub fn Icon(
 }
 
 pub mod mdi;
+pub mod mdi_light;

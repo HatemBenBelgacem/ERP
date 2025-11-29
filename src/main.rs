@@ -10,6 +10,7 @@ use crate::backend::models::auftrag::Auftrag;
 
 mod backend;
 mod components;
+mod icons;
 
 // Variablen
 static CSS: Asset = asset!("/assets/main.css");
