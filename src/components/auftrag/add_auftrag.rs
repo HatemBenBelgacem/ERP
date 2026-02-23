@@ -45,7 +45,6 @@ pub fn AddAuftrag() -> Element {
                                     selected_adresse_id.set(id);
                                 }
                             },
-                            style: "width: 50%; height: 35px; margin-bottom: 10px; border-radius: 5px; border: 0.5px solid grey;",
                             
                             // Standard Option
                             option { value: "0", "Bitte wählen..." }
