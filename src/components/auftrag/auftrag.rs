@@ -10,59 +10,50 @@ pub fn AuftragListe() -> Element {
     });
 
     rsx! {
-        div {
-            class:"functions",
-            Link { 
-                class:"btn",
-                to: "/auftrag/add", "Neu",
-            }
-            Link { 
-                class: "btn",
-                to: "/", "Zurück" 
-            } 
+        div { class: "functions",
+            Link { class: "btn", to: "/auftrag/add", "Neu" }
+            Link { class: "btn", to: "/", "Zurück" }
         }
 
         div {
             match &*auftrag_resource.read_unchecked() {
                 Some(Ok(auftrag)) => rsx! {
                     if auftrag.is_empty() {
-                        div{"Keine Aufträge gefunden"}
+                        div { "Keine Aufträge gefunden" }
                     } else {
-                        table {
-                            thead{
-                                tr{
-                                    th {"ID"}
-                                    th {"Bezeichnung"}
-                                    th { "Vorname"}
-                                    th { "Nachname"}
-                                    th { "Kunde"}
+                        table { class: "table",
+                            thead {
+                                tr {
+                                    th { "ID" }
+                                    th { "Bezeichnung" }
+                                    th { "Vorname" }
+                                    th { "Nachname" }
+                                    th { "Kunde" }
                                 }
                             }
-                            tbody{
+                            tbody {
                                 for a in auftrag {
-                                    tr{ key: "{a.id}",
-                                        td {"{a.id}"}
-                                        td {"{a.bezeichnung}"}
-                                        td {"{a.vorname.clone().unwrap_or_else(|| String::from(\"-\"))}"}
-                                        td {"{a.nachname.clone().unwrap_or_else(|| String::from(\"-\"))}"}
-                                        td {"{a.vorname.clone().unwrap_or_else(|| String::from(\"-\"))}" "{a.nachname.clone().unwrap_or_else(|| String::from(\"-\"))}"}
+                                    tr { key: "{a.id}",
+                                        td { "{a.id}" }
+                                        td { "{a.bezeichnung}" }
+                                        td { "{a.vorname.clone().unwrap_or_else(|| String::from(\"-\"))}" }
+                                        td { "{a.nachname.clone().unwrap_or_else(|| String::from(\"-\"))}" }
+                                        td {
+                                            "{a.vorname.clone().unwrap_or_else(|| String::from(\"-\"))}"
+                                            "{a.nachname.clone().unwrap_or_else(|| String::from(\"-\"))}"
+                                        }
                                     }
                                 }
                             }
                         }
                     }
                 },
-
                 Some(Err(e)) => rsx! {
-                    div {  
-                        style: "color: red", 
-                        "Fehler beim Laden von Aufträgen: {e}"
-                    }
-                }, 
-
+                    div { style: "color: red", "Fehler beim Laden von Aufträgen: {e}" }
+                },
                 None => rsx! {
-                    div {"Lade Daten..."}
-                }
+                    div { "Lade Daten..." }
+                },
             }
         }
     }

@@ -1,13 +1,9 @@
-use dioxus::{html::form, prelude::*};
+use dioxus::prelude::*;
 use crate::icons::{Icon, mdi_light};
 
-use crate::backend::{server_functions::adresse_fns::adress_liste};
+use crate::backend::server_functions::adresse_fns::adress_liste;
 use crate::components::adresse::delete_adresse::Delete;
-use crate::components::adresse::detail_adresse::AdresseDetail;
 use crate::Route;
-
-
-
 
 #[component]
 pub fn AdressListe() -> Element {
@@ -16,49 +12,78 @@ pub fn AdressListe() -> Element {
     });
 
     rsx! {
-        div { class: "functions",
-            Link { class: "btn btn-success", to: "/adressen/add", "Neu" }
-            Link { class: "btn", to: "/", "Zurück" }
+        // --- Start des Bootstrap Menübands ---
+        nav { class: "navbar navbar-expand-lg navbar-light bg-light mb-4 shadow-sm rounded",
+            div { class: "container-fluid",
+                // Titel des Menübands
+                span { class: "navbar-brand mb-0 h1", "Adressübersicht" }
+
+                // Menüpunkte (linksbündig)
+                div { class: "collapse navbar-collapse",
+                    ul { class: "navbar-nav me-auto mb-2 mb-lg-0",
+                        li { class: "nav-item",
+                            Link { class: "nav-link", to: "/", "Zurück zum Start" }
+                        }
+                    }
+
+                    // Aktions-Button (rechtsbündig)
+                    div { class: "d-flex",
+                        Link {
+                            class: "btn btn-success shadow-sm",
+                            to: "/adressen/add",
+                            "+ Neue Adresse"
+                        }
+                    }
+                }
+            }
         }
-        div {
+        // --- Ende des Bootstrap Menübands ---
+
+        // Der Bereich für die Tabelle
+        div { class: "container-fluid",
             match &*adressen_resource.read_unchecked() {
-                // 1. Erfolgreich geladen (Some -> Ok)
+                // 1. Erfolgreich geladen
                 Some(Ok(adressen)) => rsx! {
                     if adressen.is_empty() {
-                        div { "Keine Adressen gefunden." }
+                        div { class: "alert alert-info", role: "alert",
+                            "Es wurden noch keine Adressen gefunden. Bitte lege eine neue Adresse an."
+                        }
                     } else {
-                        table { class: "table",
-
-                            thead {
-                                tr {
-                                    th { "ID" }
-                                    th { "Vorname" }
-                                    th { "Nachname" }
-                                    th { "Strasse" }
-                                    th { "Strasse-Nr." }
-                                    th { colspan: 2, "Aktion" }
+                        div { class: "table-responsive",
+                            table { class: "table table-striped table-hover align-middle",
+                                thead { class: "table-light",
+                                    tr {
+                                        th { "ID" }
+                                        th { "Vorname" }
+                                        th { "Nachname" }
+                                        th { "Strasse" }
+                                        th { "Strasse-Nr." }
+                                        th { colspan: 2, "Aktion" }
+                                    }
                                 }
-                            }
-                            tbody {
-                                for adresse in adressen {
-                                    tr { key: "{adresse.id}",
-                                        td { "{adresse.id}" }
-                                        td { "{adresse.vorname}" }
-                                        td { "{adresse.nachname}" }
-                                        td { "{adresse.strasse}" }
-                                        td { "{adresse.strassen_nr}" }
-                                        td {
-                                            Delete {
-                                                adresse_resource: adressen_resource,
-                                                id: adresse.id,
-                                            }
-                                        }
-                                        td {
-                                            Link {
-                                                to: Route::AdresseDetail {
+                                tbody {
+                                    for adresse in adressen {
+                                        tr { key: "{adresse.id}",
+                                            td { "{adresse.id}" }
+                                            td { "{adresse.vorname}" }
+                                            td { "{adresse.nachname}" }
+                                            td { "{adresse.strasse}" }
+                                            td { "{adresse.strassen_nr}" }
+                                            td {
+                                                Delete {
+                                                    adresse_resource: adressen_resource,
                                                     id: adresse.id,
-                                                },
-                                                Icon { data: mdi_light::ClipboardText }
+                                                }
+                                            }
+                                            td {
+                                                Link {
+                                                    class: "btn btn-sm btn-outline-primary",
+                                                    to: Route::AdresseDetail {
+                                                        id: adresse.id,
+                                                    },
+                                                    Icon { data: mdi_light::ClipboardText }
+                                                    " Details"
+                                                }
                                             }
                                         }
                                     }
@@ -68,14 +93,16 @@ pub fn AdressListe() -> Element {
                     }
                 },
                 Some(Err(e)) => rsx! {
-                    div { style: "color: red;", "Fehler beim Laden der Adressen: {e}" }
+                    div { class: "alert alert-danger", role: "alert", "Fehler beim Laden der Adressen: {e}" }
                 },
                 None => rsx! {
-                    div { "Lade Daten..." }
+                    div { class: "d-flex justify-content-center mt-5",
+                        div { class: "spinner-border text-primary", role: "status",
+                            span { class: "visually-hidden", "Lade Daten..." }
+                        }
+                    }
                 },
             }
-        
         }
-
     }
 }
