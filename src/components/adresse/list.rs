@@ -27,7 +27,7 @@ pub fn AdressListe() -> Element {
                     if adressen.is_empty() {
                         div { "Keine Adressen gefunden." }
                     } else {
-                        table {
+                        table { class: "table",
 
                             thead {
                                 tr {
