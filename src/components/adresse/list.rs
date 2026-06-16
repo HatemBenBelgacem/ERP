@@ -16,16 +16,9 @@ pub fn AdressListe() -> Element {
     });
 
     rsx! {
-        div {
-            class:"functions",
-            Link { 
-                class:"btn",
-                to: "/adressen/add", "Neu",
-            }
-            Link { 
-                class: "btn",
-                to: "/", "Zurück" 
-            } 
+        div { class: "functions",
+            Link { class: "btn btn-success", to: "/adressen/add", "Neu" }
+            Link { class: "btn", to: "/", "Zurück" }
         }
         div {
             match &*adressen_resource.read_unchecked() {
@@ -43,7 +36,7 @@ pub fn AdressListe() -> Element {
                                     th { "Nachname" }
                                     th { "Strasse" }
                                     th { "Strasse-Nr." }
-                                    th { colspan:2,"Aktion" }
+                                    th { colspan: 2, "Aktion" }
                                 }
                             }
                             tbody {
@@ -54,32 +47,35 @@ pub fn AdressListe() -> Element {
                                         td { "{adresse.nachname}" }
                                         td { "{adresse.strasse}" }
                                         td { "{adresse.strassen_nr}" }
-                                        td {  Delete{adresse_resource: adressen_resource, id: adresse.id}}
-                                        td { Link{ to: Route::AdresseDetail{id:adresse.id}, Icon { data:mdi_light::ClipboardText }} }
+                                        td {
+                                            Delete {
+                                                adresse_resource: adressen_resource,
+                                                id: adresse.id,
+                                            }
+                                        }
+                                        td {
+                                            Link {
+                                                to: Route::AdresseDetail {
+                                                    id: adresse.id,
+                                                },
+                                                Icon { data: mdi_light::ClipboardText }
+                                            }
+                                        }
                                     }
                                 }
                             }
                         }
                     }
                 },
-                
-                // 2. Fehler beim Laden vom Server (Some -> Err)
                 Some(Err(e)) => rsx! {
-                    div { 
-                        style: "color: red;",
-                        "Fehler beim Laden der Adressen: {e}" 
-                    }
+                    div { style: "color: red;", "Fehler beim Laden der Adressen: {e}" }
                 },
-
-                // 3. Daten werden noch geladen (None)
-                // Hier lag der Fehler: Es ist einfach "None", nicht "Some(None)"
                 None => rsx! {
                     div { "Lade Daten..." }
-                }
+                },
             }
-            
-            
+        
         }
-       
+
     }
 }
