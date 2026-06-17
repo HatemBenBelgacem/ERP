@@ -9,7 +9,7 @@ use crate::backend::models::adresse::Adresse;
 #[component]
 pub fn Delete(mut adresse_resource: Resource<Result<Vec<Adresse>, ServerFnError>>, id:i64) -> Element {
     rsx!{
-        button { 
+        button {
             onclick: move |_| async move {
                 match delete_adresse(id).await {
                     Ok(_) => {
@@ -18,7 +18,7 @@ pub fn Delete(mut adresse_resource: Resource<Result<Vec<Adresse>, ServerFnError>
                     Err(e) => {}
                 }
             },
-            Icon{data:mdi_light::Delete}
+            i { class: "bi bi-trash3" }
         }
     }
 }

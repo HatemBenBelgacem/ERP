@@ -31,7 +31,8 @@ pub fn AdressListe() -> Element {
                         Link {
                             class: "btn btn-success shadow-sm",
                             to: "/adressen/add",
-                            "+ Neue Adresse"
+                            i { class: "bi bi-file-earmark-plus" }
+                            " Neu"
                         }
                     }
                 }
@@ -81,8 +82,7 @@ pub fn AdressListe() -> Element {
                                                     to: Route::AdresseDetail {
                                                         id: adresse.id,
                                                     },
-                                                    Icon { data: mdi_light::ClipboardText }
-                                                    " Details"
+                                                    i { class: "bi bi-file-earmark-text" }
                                                 }
                                             }
                                         }
